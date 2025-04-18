@@ -1,0 +1,816 @@
+FORMAT: 1A
+HOST: https://api.clockit.io/api
+
+# CLOCKIT API
+
+Use the ClockIt API to extend the functionality of ClockIt and integrate with your own tools. 
+
+## Common API Errors
+
+| Http Status Code | Error Code | Description                                                                                 |
+|------------------|------------|---------------------------------------------------------------------------------------------|
+| 400              | 8000       | Malformed auth header. Ensure you have attached your API key with the Authorization header. |
+| 400              | 8001       | Ensure that the Content-Type is set to application/json.                                    |
+| 400              | 8002       | Too many requests in a short span.                                                          |
+| 400              | 8003       | Invalid API Key/App ID.                                                                     |
+  
+
+## Time logs API [/v1/app/{app_id}/users/logs?start_date={start_date}&end_date={end_date}]
+Get all records for all users within a date range.
+
+### All users [GET]
+
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 9000       | Invalid start date. Expects YYYY-MM-DD format.|
+| 400              | 9001       | Invalid end date. Expects YYYY-MM-DD format.  |
+| 400              | 9002       | The end date cannot be before the start date. |
+| 400              | 9003       | Invalid User ID.                              |
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+   "data":[
+      {
+         "date":"2018-01-01",
+         "employees":[
+            {
+               "user_id":"Z01pS",
+               "employee_id":"CLOCKIT-EMP-100",
+               "first_name":"Chester",
+               "last_name":"Becker",
+               "email":"chester.becker@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+                  "Designer",
+                  "UX",
+                  "UI"
+               ],
+               "punched_in":"2018-01-01 09:08:46",
+               "punched_out":"2018-01-01 18:40:18",
+               "punches":[
+                  {
+                     "type":"iOS",
+                     "date":"2018-01-01 09:08:46",
+                     "latitude":40.7128,
+                     "longitude":74.0060,
+                  },
+                  {
+                     "type":"Android",
+                     "date":"2018-01-01 12:22:26",
+                     "latitude":40.7128,
+                     "longitude":74.0060,
+                  },
+                  {
+                     "type":"Android",
+                     "date":"2018-01-01 13:30:26",
+                     "latitude":40.7128,
+                     "longitude":74.0060,
+                  },
+                  {
+                     "type":"Web",
+                     "date":"2018-01-01 18:40:18",
+                     "latitude": null,
+                     "longitude": null
+                  }
+               ],
+               "total_worked_duration_in_milliseconds": 30212000,
+               "total_break_duration_in_milliseconds": 4080000,
+               "total_duration_in_milliseconds": 34292000,
+               "total_required_work_duration_in_milliseconds": 32400000,
+               "total_direct_overtime_in_milliseconds": 0,
+               "tpi": 85.12
+               "pe": 10.2
+            },
+            {
+               "user_id":"Ax22B",
+               "employee_id":"CLOCKIT-EMP-101",
+               "first_name":"Sharell",
+               "last_name":"Kellett",
+               "email":"sharell@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+
+               ],
+               "punched_in":null,
+               "punched_out":null,
+               "punches":[
+
+               ],
+               "total_worked_duration_in_milliseconds": 0,
+               "total_break_duration_in_milliseconds": 0,
+               "total_duration_in_milliseconds": 0,
+               "total_required_work_duration_in_milliseconds": 0,
+               "total_direct_overtime_in_milliseconds": 0,
+               "tpi": 0
+               "pe": 0
+            }
+         ]
+      },
+      {
+         "date":"2018-01-02",
+         "employees":[
+            {
+               "user_id":"Z01pS",
+               "employee_id":"CLOCKIT-EMP-100",
+               "first_name":"Chester",
+               "last_name":"Becker",
+               "email":"chester.becker@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+                  "Designer",
+                  "UX",
+                  "UI"
+               ],
+               "punched_in":null,
+               "punched_out":null,
+               "punches":[
+
+               ],
+               "total_worked_duration_in_milliseconds": 0,
+               "total_break_duration_in_milliseconds": 0,
+               "total_duration_in_milliseconds": 0,
+               "total_required_work_duration_in_milliseconds": 0,
+               "total_direct_overtime_in_milliseconds": 0,
+               "tpi": 0
+               "pe": 0
+            },
+            {
+               "user_id":"Ax22B",
+               "employee_id":"CLOCKIT-EMP-101",
+               "first_name":"Sharell",
+               "last_name":"Kellett",
+               "email":"sharell@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+
+               ],
+               "punched_in":"2018-01-02 09:00:46",
+               "punched_out":"2018-01-02 16:40:11",
+               "punches":[
+                  {
+                     "type":"Slack",
+                     "date":"2018-01-02 09:00:46",
+                     "latitude": null,
+                     "longitude": null
+                  },
+                  {
+                     "type":"Biometric",
+                     "date":"2018-01-02 16:40:11",
+                     "latitude": null,
+                     "longitude": null
+                  }
+               ],
+               "total_worked_duration_in_milliseconds": 38365000,
+               "total_break_duration_in_milliseconds": 0,
+               "total_duration_in_milliseconds": 38365000,
+               "total_required_work_duration_in_milliseconds": 32400000,
+               "total_direct_overtime_in_milliseconds": 5965000,
+               "tpi": 0
+               "pe": 0
+            }
+         ]
+      }
+   ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+        
+        
+## Checkin logs API [/v1/app/{app_id}/checkins/logs?start_date={start_date}&end_date={end_date}]
+Get all checkins for all users within a date range.
+
+### All checkins [GET]
+
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 9000       | Invalid start date. Expects YYYY-MM-DD format.|
+| 400              | 9001       | Invalid end date. Expects YYYY-MM-DD format.  |
+| 400              | 9002       | The end date cannot be before the start date. |
+| 400              | 9003       | Invalid User ID.                              |
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+   "data":[
+      {
+         "date":"2018-01-01",
+         "employees":[
+            {
+               "user_id":"Z01pS",
+               "employee_id":"CLOCKIT-EMP-100",
+               "first_name":"Chester",
+               "last_name":"Becker",
+               "email":"chester.becker@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+                  "Designer",
+                  "UX",
+                  "UI"
+               ],
+               "checkins": [
+                        {
+                            "checkin_id": "Anm5q",
+                            "checkin_date": "2018-01-01 10:18:24",
+                            "checkin_description": "Checkin at location one",
+                            "checkin_latitude": 40.759700,
+                            "checkin_longitude": -73.984809,
+                            "checkin_accuracy": 65,
+                            "checkout_date": "2018-01-01 10:30:14",
+                            "checkin_latitude": 40.759700,
+                            "checkin_longitude": -73.984809,
+                            "checkout_accuracy": 10,
+                            "photos": [
+                                "https://url_to_checkin_photo.clockit.io/1.png",
+                                "https://url_to_checkin_photo.clockit.io/2.png"
+                            ]
+                        },
+                        {
+                            "checkin_id": "OmpzB",
+                            "checkin_date": "2018-01-01 11:00:32",
+                            "checkin_description": "Checkin at location two",
+                            "checkin_latitude": 40.759214,
+                            "checkin_longitude": -73.978634,
+                            "checkin_accuracy": 10,
+                            "checkout_date": null,
+                            "checkout_latitude": null,
+                            "checkout_longitude": null,
+                            "checkout_accuracy": null,
+                            "photos": []
+                        }
+                    ]
+            },
+            {
+               "user_id":"Ax22B",
+               "employee_id":"CLOCKIT-EMP-101",
+               "first_name":"Sharell",
+               "last_name":"Kellett",
+               "email":"sharell@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+
+               ],
+               "checkins": []
+            }
+         ]
+      },
+      {
+         "date":"2018-01-02",
+         "employees":[
+            {
+               "user_id":"Z01pS",
+               "employee_id":"CLOCKIT-EMP-100",
+               "first_name":"Chester",
+               "last_name":"Becker",
+               "email":"chester.becker@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+                  "Designer",
+                  "UX",
+                  "UI"
+               ],
+               "checkins": []
+            },
+            {
+               "user_id":"Ax22B",
+               "employee_id":"CLOCKIT-EMP-101",
+               "first_name":"Sharell",
+               "last_name":"Kellett",
+               "email":"sharell@clockit.io",
+               "site_name":"Head Office",
+               "department_name":"Bridge Club",
+               "template_name":"Regular Shift",
+               "tags":[
+
+               ],
+               "checkins": []
+            }
+         ]
+      }
+   ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+        
+## Basic Attendnace Report API [/v1/app/{app_id}/basic_reports/attendance_report?start_date={start_date}&end_date={end_date}]
+Get all records for all users within a date range.
+
+### All users [GET]
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 9000       | Invalid start date. Expects YYYY-MM-DD format.|
+| 400              | 9001       | Invalid end date. Expects YYYY-MM-DD format.  |
+| 400              | 9002       | The end date cannot be before the start date. |
+| 400              | 9003       | Invalid User ID.                              |
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
+       
++ Response 200 (application/json)
+
+{
+   "data":[
+      {
+         "date":"2018-01-01",
+         "user_id":"Z01pS",
+         "first_name":"Chester",
+         "last_name":"Becker",
+         "gender":"MALE",
+         "group_name":"Admin",
+         "template_name":"Regular Shift",
+         "email":"chester.becker@clockit.io",
+         "employee_id":"TEC001",
+         "tags":[
+            "Designer",
+            "UX",
+            "UI"
+         ],
+         "department_name":"Bridge Club",
+         "site_id":"V04pQ",
+         "site_name":"Head Office",
+         "manager_first_name":null,
+         "manager_last_name":null,
+         "manager_email":null,
+         "total_duration_in_milliseconds":0,
+         "total_breakDuration_in_milliseconds":0,
+         "total_worked_duration_in_milliseconds":0,
+         "required_work_duration_in_milliseconds":32400000,
+         "total_direct_overtime_in_milliseconds":0,
+         "regular_work_duration_in_milliseconds":0,
+         "tpi":0,
+         "pe":0,
+         "is_on_approved_leave":0,
+         "is_on_approved_business_travel":0,
+         "is_holiday":0,
+         "punched_in":null,
+         "punched_out":null,
+         "number_of_breaks":0,
+         "allowed_break_duration_in_milliseconds":3600000,
+         "excess_break_duration_in_milliseconds":0,
+         "late_by_in_milliseconds":0,
+         "early_by_in_milliseconds":0,
+         "early_going_in_milliseconds":0,
+         "late_going_in_milliseconds":0,
+         "status":"ABSENT",
+         "leave_type_name": null,
+         "number_of_leave_units_in_milliseconds": null
+      },
+      {
+         "date":"2018-01-01",
+         "user_id":"GgAya",
+         "first_name":"Sharell",
+         "last_name":"Kellett",
+         "gender":"MALE",
+         "group_name":"Admin",
+         "template_name":"Regular Shif",
+         "email":"sharell@clockit.io",
+         "employee_id":"TEC002",
+         "tags":[
+
+         ],
+         "department_name":"Bridge Club",
+         "site_id":"V04pQ",
+         "site_name":"Head Office",
+         "manager_first_name":"Chester",
+         "manager_last_name":"Becker",
+         "manager_email":"chester.becker@clockit.io",
+         "total_duration_in_milliseconds":28800000,
+         "total_breakDuration_in_milliseconds":3600000,
+         "total_worked_duration_in_milliseconds":25200000,
+         "required_work_duration_in_milliseconds":18000000,
+         "total_direct_overtime_in_milliseconds":10800000,
+         "regular_work_duration_in_milliseconds":18000000,
+         "tpi":160,
+         "pe":0,
+         "is_on_approved_leave":0,
+         "is_on_approved_business_travel":0,
+         "is_holiday":0,
+         "punched_in":"09:00",
+         "punched_out":"18:00",
+         "number_of_breaks":0,
+         "allowed_break_duration_in_milliseconds":3600000,
+         "excess_break_duration_in_milliseconds":0,
+         "late_by_in_milliseconds":0,
+         "early_by_in_milliseconds":0,
+         "early_going_in_milliseconds":0,
+         "late_going_in_milliseconds":0,
+         "status":"ABSENT",
+         "leave_type_name": null,
+         "number_of_leave_units_in_milliseconds": null
+      },
+      {
+         "date":"2018-01-02",
+         "user_id":"Z01pS",
+         "first_name":"Chester",
+         "last_name":"Becker",
+         "gender":"MALE",
+         "group_name":"Admin",
+         "template_name":"Regular Shift",
+         "email":"chester.becker@clockit.io",
+         "employee_id":"TEC001",
+         "tags":[
+            "Designer",
+            "UX",
+            "UI"
+         ],
+         "department_name":"Bridge Club",
+         "site_id":"V04pQ",
+         "site_name":"Head Office",
+         "manager_first_name":null,
+         "manager_last_name":null,
+         "manager_email":null,
+         "total_duration_in_milliseconds":0,
+         "total_breakDuration_in_milliseconds":0,
+         "total_worked_duration_in_milliseconds":0,
+         "required_work_duration_in_milliseconds":32400000,
+         "total_direct_overtime_in_milliseconds":0,
+         "regular_work_duration_in_milliseconds":0,
+         "tpi":0,
+         "pe":0,
+         "is_on_approved_leave":0,
+         "is_on_approved_business_travel":0,
+         "is_holiday":0,
+         "punched_in":null,
+         "punched_out":null,
+         "number_of_breaks":0,
+         "allowed_break_duration_in_milliseconds":3600000,
+         "excess_break_duration_in_milliseconds":0,
+         "late_by_in_milliseconds":0,
+         "early_by_in_milliseconds":0,
+         "early_going_in_milliseconds":0,
+         "late_going_in_milliseconds":0,
+         "status":"ABSENT",
+         "leave_type_name": null,
+         "number_of_leave_units_in_milliseconds": null
+      },
+      {
+         "date":"2018-01-02",
+         "user_id":"GgAya",
+         "first_name":"Sharell",
+         "last_name":"Kellett",
+         "gender":"MALE",
+         "group_name":"Admin",
+         "template_name":"Regular Shif",
+         "email":"sharell@clockit.io",
+         "employee_id":"TEC002",
+         "tags":[
+
+         ],
+         "department_name":"Bridge Club",
+         "site_id":"V04pQ",
+         "site_name":"Head Office",
+         "manager_first_name":"Chester",
+         "manager_last_name":"Becker",
+         "manager_email":"chester.becker@clockit.io",
+         "total_duration_in_milliseconds":28800000,
+         "total_breakDuration_in_milliseconds":3600000,
+         "total_worked_duration_in_milliseconds":25200000,
+         "required_work_duration_in_milliseconds":18000000,
+         "total_direct_overtime_in_milliseconds":10800000,
+         "regular_work_duration_in_milliseconds":18000000,
+         "tpi":160,
+         "pe":0,
+         "is_on_approved_leave":0,
+         "is_on_approved_business_travel":0,
+         "is_holiday":0,
+         "punched_in":"09:00",
+         "punched_out":"18:00",
+         "number_of_breaks":0,
+         "allowed_break_duration_in_milliseconds":3600000,
+         "excess_break_duration_in_milliseconds":0,
+         "late_by_in_milliseconds":0,
+         "early_by_in_milliseconds":0,
+         "early_going_in_milliseconds":0,
+         "late_going_in_milliseconds":0,
+         "status":"PRESENT",
+         "leave_type_name": null,
+         "number_of_leave_units_in_milliseconds": null
+      }
+   ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+    
+## Holidays API [/v1/app/{app_id}/holidays?start_date={start_date}&end_date={end_date}]
+Get all holidays within a date range.
+
+### All holidays [GET]
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 9000       | Invalid start date. Expects YYYY-MM-DD format.|
+| 400              | 9001       | Invalid end date. Expects YYYY-MM-DD format.  |
+| 400              | 9002       | The end date cannot be before the start date. |
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+    "data": [
+        {
+            "holiday_id": "faep4f",
+            "holiday_name": "Independence Day",
+            "holiday_from": "2019-07-04",
+            "holiday_to": "2019-07-04",
+            "site_id": "0d0192",
+            "site_name": "North Carolina HO"
+        },
+        {
+            "holiday_id": "D0p192",
+            "holiday_name": "Thanksgiving",
+            "holiday_from": "2019-11-28",
+            "holiday_to": "2019-11-28",
+            "site_id": "0d0192",
+            "site_name": "Colorado HO"
+        }
+    ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+        
+        
+## Leave request API [/v1/app/{app_id}/leave_requests?start_date={start_date}&end_date={end_date}]
+Get all leave requests within a date range.
+
+### All leave requests [GET]
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 9000       | Invalid start date. Expects YYYY-MM-DD format.|
+| 400              | 9001       | Invalid end date. Expects YYYY-MM-DD format.  |
+| 400              | 9002       | The end date cannot be before the start date. |
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+    "data": [
+        {
+            "leave_request_id": "faep4f",
+            "user_id":"Z01pS",
+            "employee_id":"TEC001",
+            "first_name":"Chester",
+            "last_name":"Becker",
+            "email":"chester.becker@clockit.io",
+            "site_id": "0d0192",
+            "site_name": "North Carolina HO",
+            "department_name":"Bridge Club",
+            "tags":[
+                "Designer",
+                "UX",
+                "UI"
+            ],
+            "leave_type_id": "jVn75",
+            "leave_type_name": "Sick leave",
+            "leave_from": "2020-01-01",
+            "leave_to": "2020-01-02",
+            "status": "approved",
+            "comments": "<p>Medical appointment</p>",
+            "number_of_units": 1,
+            "unit": "days",
+            "isHalfDay": false,
+            "documents": [
+              {
+                "name": "Medical report",
+                "url": "https://cdn.clockit.io/link-to-the-document.pdf"
+              }
+            ]
+        }
+    ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+        
+        
+## Leave balance API [/v1/app/{app_id}/users/{user_id}/leave_balances]
+Get all leave requests within a date range.
+
+### Leave balances for a user [GET]
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+    "data": [
+       {
+          "user_id": "jVn75",
+          "leave_type_id": "gap1x",
+          "name": "Casual Leaves",
+          "description": "Mandatory Leaves",
+          "unit": "days",
+          "balance": 22
+        },
+        {
+          "user_id": "jVn75",
+          "leave_type_id": "Kx4Lx",
+          "name": "Sick Leave",
+          "description": "Leave taken when Sick",
+          "unit": "hours",
+          "balance": 17
+        },
+        {
+          "user_id": "jVn75",
+          "leave_type_id": "GK0Jj",
+          "name": "Earned Leave",
+          "description": "Earned leave 2 per month.",
+          "unit": "days",
+          "balance": 2
+        }
+    ]
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 123,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+                
+        
+## Clockin/Clockout API [/v1/app/{app_id}/users/{user_id}/clock]
+Clockin/Clockout users.
+
+### Clockin/Clockout [POST]
+
+
+#### Errors Codes
+
+| Http Status Code | Error Code | Description                                   |
+|------------------|------------|-----------------------------------------------|
+| 400              | 1020       | The joining/hire date is set to a future date.|
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+    + Body
+        {}
+        
++ Response 200 (application/json)
+
+{
+    "data": {
+        "success" : true
+    }
+}
+
++ Response 400 (application/json)
+    
+    Refer to the error codes table in the description.
+    
+    + Body
+        {
+            "code": 1020,
+            "httpStatusCode": 400,
+            "message": "Error description"
+        }
+       
+## Mobile Geofence Restrictions API [/v1/app/{app_id}/users/{user_id}/mobile/geofences]
+Get all geofence restrictions list for mobile.
+
+### Mobile Geofence Restrictions List [GET]
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+    "data": [
+        {
+          "description": "Sector One",
+          "radius": 90,
+          "unit": "mi",
+          "accuracy": 100
+        },
+        {
+          "description": "Sector Two",
+          "radius": 200,
+          "unit": "m",
+          "accuracy": 100
+        }
+    ]
+}
+
+## Web IP Restrictions API [/v1/app/{app_id}/users/{user_id}/web/ip_list]
+Get all geofence restrictions list for mobile.
+
+### Web IP Restrictions List [GET]
+
++ Request (application/json)
+    + Headers
+        Authorization: Bearer {api_key}
+        
++ Response 200 (application/json)
+
+{
+    "data": [
+          {
+            "description": "Head office",
+            "ip_address": "100.1.1.1",
+            "domain_name": "restricted.domain.com"
+          },
+          {
+            "description": "Regional office",
+            "ip_address": "100.1.1.2",
+            "domain_name": null
+          }
+    ]
+}
+
+        

@@ -1,0 +1,55 @@
+{
+  "name": "time-report",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.8.1",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "eslint '**/*.{js,ts,jsx,tsx}'",
+    "check-types": "tsc --noEmit",
+    "clean": "rimraf ./dist && rimraf ./out",
+    "build-ts": "tsc",
+    "build-exe": "pkg . --output dist/time-report.exe --no-bytecode",
+    "copy-config": "cpx template.config.json dist/",
+    "copy-network": "cpx \"dist/**/*\" \"\\\\10.1.1.2\\public\\time-report\"",
+    "package": "pnpm clean && pnpm build-ts && pnpm build-exe && pnpm copy-config",
+    "deploy": "pnpm package && pnpm copy-network"
+  },
+  "bin": "out/index.js",
+  "pkg": {
+    "assets": [
+      "node_modules/axios/**/*"
+    ],
+    "scripts": "out/**/*.js",
+    "targets": [
+      "node18-win-x64"
+    ]
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "luxon": "^3.6.1",
+    "nodemailer": "^6.10.1",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@types/luxon": "^3.6.2",
+    "@types/node": "^22.14.1",
+    "@types/node-notifier": "^8.0.5",
+    "@types/nodemailer": "^6.4.17",
+    "cpx": "^1.5.0",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "globals": "^16.0.0",
+    "pkg": "^5.8.1",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
+  }
+}
