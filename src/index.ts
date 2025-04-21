@@ -10,7 +10,7 @@ import type {
 } from './types.js';
 
 const API_URL = `https://api.clockit.io/api/v1/app/${config.appId}/basic_reports/attendance_report`;
-const START_PAY_DATE = '2025-03-30';
+const START_PAY_DATE = '2025-04-20';
 
 function formatHoursToHHMM(decimalHours: number): string {
   const hours = Math.floor(decimalHours);
