@@ -1,13 +1,13 @@
-export interface DateRange {
+interface DateRange {
   startDate: string;
   endDate: string;
 }
 
-export interface AttendanceReportResponse {
+interface AttendanceReportResponse {
   data: AttendanceRecord[];
 }
 
-export interface AttendanceRecord {
+interface AttendanceRecord {
   date: string;
   user_id: string;
   first_name: string;
@@ -49,7 +49,7 @@ export interface AttendanceRecord {
   number_of_leave_units_in_milliseconds: number | null;
 }
 
-export interface EmployeeHours {
+interface EmployeeHours {
   name: string;
   regularHours: number;
   overtimeHours: number;

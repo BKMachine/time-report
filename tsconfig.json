@@ -17,5 +17,5 @@
     "target": "es2017",
     "outDir": "out"
   },
-  "include": ["./src"]
+  "include": ["./src", "./index.d.ts"]
 }

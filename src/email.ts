@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import nodemailer from 'nodemailer';
 import config from './config.js';
-import type { DateRange } from './types.js';
 
 export default function send(
   dateRanges: DateRange[],
@@ -63,6 +62,6 @@ export default function send(
   };
 
   transporter.sendMail(mailOptions, (error) => {
-    if (error) throw new Error('Error sending email: ' + error.message);
+    if (error) throw new Error(`Error sending email: ${error.message}`);
   });
 }

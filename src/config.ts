@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import zod from 'zod';
 
 const json = fs.readFileSync('config.json', 'utf-8');
@@ -32,3 +32,5 @@ if (!parsedConfig.success) {
 }
 
 export default parsedConfig.data;
+
+

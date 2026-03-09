@@ -2,12 +2,6 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import config from './config.js';
 import email from './email.js';
-import type {
-  DateRange,
-  AttendanceRecord,
-  AttendanceReportResponse,
-  EmployeeHours,
-} from './types.js';
 
 const API_URL = `https://api.clockit.io/api/v1/app/${config.appId}/basic_reports/attendance_report`;
 const START_PAY_DATE = '2025-04-20';
