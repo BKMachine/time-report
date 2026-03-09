@@ -6,26 +6,19 @@
   "packageManager": "pnpm@10.8.1",
   "scripts": {
     "dev": "tsx ./src/index.ts",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "eslint '**/*.{js,ts,jsx,tsx}'",
-    "check-types": "tsc --noEmit",
+    "format": "biome format --write",
+    "check": "biome check",
     "clean": "rimraf ./dist && rimraf ./out",
-    "build-ts": "tsc",
+    "build-ts": "pnpm format && pnpm check && tsc",
     "build-exe": "pkg . --output dist/time-report.exe --no-bytecode",
     "copy-config": "cpx template.config.json dist/",
-    "copy-network": "cpx \"dist/**/*\" \"\\\\10.1.1.2\\public\\time-report\"",
-    "package": "pnpm clean && pnpm build-ts && pnpm build-exe && pnpm copy-config",
-    "deploy": "pnpm package && pnpm copy-network"
+    "package": "pnpm clean && pnpm build-ts && pnpm build-exe && pnpm copy-config"
   },
   "bin": "out/index.js",
   "pkg": {
-    "assets": [
-      "node_modules/axios/**/*"
-    ],
+    "assets": ["node_modules/axios/**/*"],
     "scripts": "out/**/*.js",
-    "targets": [
-      "node18-win-x64"
-    ]
+    "targets": ["node18-win-x64"]
   },
   "dependencies": {
     "axios": "^1.13.6",

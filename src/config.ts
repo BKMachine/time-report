@@ -25,12 +25,10 @@ const configSchema = zod.object({
 
 const parsedConfig = configSchema.safeParse(config);
 if (!parsedConfig.success) {
-  const firstError = parsedConfig.error.errors[0];
+  const firstError = parsedConfig.error.issues[0];
   const errorMessage = `Invalid config file: "${firstError?.path.join('.')}" - ${firstError?.message}`;
   console.error(errorMessage);
   process.exit(1);
 }
 
 export default parsedConfig.data;
-
-

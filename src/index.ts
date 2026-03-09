@@ -58,7 +58,8 @@ function parseEmployeeTimes(results: AttendanceRecord[][]): EmployeeHours[] {
       if (!weeklyHours.has(name)) weeklyHours.set(name, 0);
       const regularHours = record.regular_work_duration_in_milliseconds / 3600000;
       const overtimeHours = record.total_direct_overtime_in_milliseconds / 3600000;
-      const current = weeklyHours.get(name)!;
+      const current = weeklyHours.get(name);
+      if (!current) throw new Error(`Unexpected error: weekly hours for ${name} is undefined`);
       weeklyHours.set(name, current + regularHours + overtimeHours);
     });
 
@@ -66,7 +67,8 @@ function parseEmployeeTimes(results: AttendanceRecord[][]): EmployeeHours[] {
       if (!totalHours.has(name)) totalHours.set(name, { name, regularHours: 0, overtimeHours: 0 });
       const regularHours = Math.min(40, hours);
       const overtimeHours = Math.max(0, hours - 40);
-      const employee = totalHours.get(name)!;
+      const employee = totalHours.get(name);
+      if (!employee) throw new Error(`Unexpected error: employee data for ${name} is undefined`);
       employee.regularHours += regularHours;
       employee.overtimeHours += overtimeHours;
     }
@@ -75,7 +77,8 @@ function parseEmployeeTimes(results: AttendanceRecord[][]): EmployeeHours[] {
   config.salariedHours.forEach((salaried) => {
     const { name, hours } = salaried;
     if (!totalHours.has(name)) totalHours.set(name, { name, regularHours: 0, overtimeHours: 0 });
-    const employee = totalHours.get(name)!;
+    const employee = totalHours.get(name);
+    if (!employee) throw new Error(`Unexpected error: employee data for ${name} is undefined`);
     employee.regularHours = hours;
     employee.overtimeHours = 0;
   });
