@@ -58,8 +58,7 @@ function parseEmployeeTimes(results: AttendanceRecord[][]): EmployeeHours[] {
       if (!weeklyHours.has(name)) weeklyHours.set(name, 0);
       const regularHours = record.regular_work_duration_in_milliseconds / 3600000;
       const overtimeHours = record.total_direct_overtime_in_milliseconds / 3600000;
-      const current = weeklyHours.get(name);
-      if (!current) throw new Error(`Unexpected error: weekly hours for ${name} is undefined`);
+      const current = weeklyHours.get(name) || 0;
       weeklyHours.set(name, current + regularHours + overtimeHours);
     });
 
